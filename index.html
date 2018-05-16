@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react-dom.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
@@ -15,7 +15,14 @@
 
 
 
+<style >
 
+#input{
+  width:100%;
+  text-align: center;
+}
+
+</style>
 
 <script type='text/babel'>
 
@@ -24,64 +31,53 @@ var Component = React.createClass({
 
 getInitialState: function(){
 
-return {
-  text: "",
-  todos: [
 
-    {id:1,task:"Build First React App"},
-    {id:2,task:"Build Second React App"},
-    {id:3,task:"Build Third React App"}]
-}
 
+      return {
+        text: " This is some text from the Initial State"
+      }
 },
 
-
   render: function(){
     return (
       <div>
-        <ToDoForm />
-        <ToDoList tasks={this.state.todos} />
+        Directly add on the component <br/>
+        Pulled From Initial State Method :  {this.state.text}
+        <br/>
+      <form>
+        <input  onChange={this.someChangeFunction}  id="input"  type="text" value={this.state.text}/>
+
+      </form>
+        <br/>
+        <SecondComponent text={"This was passed into the Second Component Tag which was embeded in Component." + this.state.text}/>
+        <br/>
+        <button  onClick={this.someFunction} className="btn btn-primary">Clear Initial State Text</button>
       </div>
     )
+  },
+
+  someFunction(){
+
+    this.setState({text: ""})
+  },
+
+  someChangeFunction(e){
+
+    this.setState({text: e.target.value})
   }
-
-
-
 
 })
 
 
-
-var ToDoForm = React.createClass({
-
+var SecondComponent = React.createClass({
   render: function(){
-    return (
+    return(
       <div>
-      To Do Form
+        Directly On the Second Component <br/>
+        {this.props.text}
+
       </div>
-    )
-  }
-
-})
-
-var ToDoList = React.createClass({
-
-
-
-  render: function(props){
-    return (
-          <ul className="group-list">
-          {this.props.tasks.map(task => {
-            return <li className='item-list' task={task}> {task.task}</li>
-          })}
-
-          </ul>
-
-
-
-        )
-      }
-
+  )}
 })
 
 
@@ -110,6 +106,9 @@ ReactDOM.render(<Component/> , document.getElementById('content'))
 
 
 </script>
+
+
+
 
 </body>
 </html>
