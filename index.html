@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react-dom.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.js"></script>
+</head>
+<body>
+
+  <div class="jumbotron text-center">
+    <div id="content"></div>
+    </div>
+
+
+
+
+
+<script type='text/babel'>
+
+
+var Component = React.createClass({
+
+getInitialState: function(){
+
+return {
+  text: "",
+  todos: [
+
+    {id:1,task:"Build First React App"},
+    {id:2,task:"Build Second React App"},
+    {id:3,task:"Build Third React App"}]
+}
+
+},
+
+
+  render: function(){
+    return (
+      <div>
+        <ToDoForm />
+        <ToDoList tasks={this.state.todos} />
+      </div>
+    )
+  }
+
+
+
+
+})
+
+
+
+var ToDoForm = React.createClass({
+
+  render: function(){
+    return (
+      <div>
+      To Do Form
+      </div>
+    )
+  }
+
+})
+
+var ToDoList = React.createClass({
+
+
+
+  render: function(props){
+    return (
+          <ul className="group-list">
+          {this.props.tasks.map(task => {
+            return <li className='item-list' task={task}> {task.task}</li>
+          })}
+
+          </ul>
+
+
+
+        )
+      }
+
+})
+
+
+
+
+
+
+// Alternate way to create React Class
+
+// function Component(){
+//
+//   return (
+//     <div>
+//       <ToDoList/>
+//       <ToDoForm/>
+//     </div>
+//   )
+//
+// }
+
+
+
+
+
+ReactDOM.render(<Component/> , document.getElementById('content'))
+
+
+</script>
+
+</body>
+</html>
